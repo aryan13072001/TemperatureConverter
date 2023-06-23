@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+
+body{
+    background-image: url(img/codioful-formerly-gradienta-7brhZmwXn08-unsplash.jpg);
+    background-size: 180vw ;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+        #main-container {
+            text-align: center;
+            margin: auto;
+            padding: 12vh;
+            margin-top: 8vh;
+            background-color: rgb(198, 171, 198);
+            width: 50vw;
+            padding: 20vh 15vw;
+            border-radius: 4rem;
+        }
+
+        #bckimg{
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .main-container-box {
+            display: inline-block;
+        }
+
+        .main-container-box span {
+            font-size: 40px;
+            color: black;
+            
+        }
+
+        .inp {
+            padding: 2vh 2vw;
+            margin: 2vh auto;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .temp_type{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .temp-type{
+            text-align: justify;
+            margin: -2vh auto;
+            padding: 0vh 7.90999vw;
+            border-radius: 2px;
+        }
+
+        label {
+            font-size: 25px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Temperature Converter</h1>
+    <div id="main-container">
+        <div class="main-container-box">
+            <label for="" id="myCel">Celsius: </label><br>
+            <input type="number" id="cel" value="0" class="inp temp_type" required>
+            <select name="temp-type" id="temp-type-1" class="temp_type temp-type">
+                <option value="0" selected>Celsius</option>
+                <option value="1">Kelvin</option>
+                <option value="2">Fahrenheit</option>
+            </select>
+        </div>
+        <div class="main-container-box">
+            <span><strong>⇌</strong></span>
+        </div>
+        <div class="main-container-box">
+            <label for="" id="myFah">Fahrenheit: </label><br>
+            <input type="number" id="fah" value="32" class="inp temp_type" required>
+            <select name="temp-type" id="temp-type-2" class="temp_type temp-type">
+                <option value="0" selected>Fahrenheit</option>
+                <option value="1">Celsius</option>
+                <option value="2">Kelvin</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+
+        var cel = document.getElementById('cel')
+        var fah = document.getElementById('fah')
+
+        cel.addEventListener('input', function () {
+            let c = this.value
+
+            var selectedTemp1 = document.getElementById('temp-type-1')
+
+            if(selectedTemp1.value==0&&selectedTemp2.value==0){
+                let f=(c*9/5)+32
+
+                if (!Number.isInteger(f)) {
+                   f = f.toFixed(4)
+                }
+                fah.value = f;
+            }
+
+            if(selectedTemp1.value==2&&selectedTemp2.value==1){
+                let f=(c*9/5)+32
+
+                if (!Number.isInteger(f)) {
+                   f = f.toFixed(4)
+                }
+                fah.value = f;
+            }
+
+            if(selectedTemp1.value==0&&selectedTemp2.value==1){
+                fah.value = c;
+            }
+
+            if(selectedTemp1.value==0&&selectedTemp2.value==2){
+                let f = +c + +273.15
+
+                fah.value = f;
+            }
+
+            if(selectedTemp1.value==1&&selectedTemp2.value==0){
+                let f = 1.8*(c-273) + 32
+
+                if (!Number.isInteger(f)) {
+                   f = f.toFixed(4)
+                }
+                fah.value = f;
+            }
+
+            if(selectedTemp1.value==1&&selectedTemp2.value==1){
+                let f = +c - +273.15
+
+                fah.value = f;
+            }
+
+            if(selectedTemp1.value==1&&selectedTemp2.value==2){
+                let f = c
+                fah.value = f;
+            }
+
+            if(selectedTemp1.value==2&&selectedTemp2.value==0){
+                let f = c
+                fah.value = f;
+            }
+
+            if(selectedTemp1.value==2&&selectedTemp2.value==2){
+                let f = ((c - 32)*5)/9 + 273.15
+
+                if (!Number.isInteger(f)) {
+                   f = f.toFixed(4)
+                }
+                fah.value = f;
+            }
+
+        })
+
+//------------------------------------------------------------------------------------------------------------------
+
+        fah.addEventListener('input', function () {
+            let f = this.value
+
+            if(selectedTemp2.value==0&&selectedTemp1.value==0){
+                let c = (f - 32) * 5/9
+                
+                if (!Number.isInteger(c)) {
+                    c = c.toFixed(4)
+                }
+                cel.value = c;
+            }
+
+            if(selectedTemp2.value==0&&selectedTemp1.value==1){
+                let c = ((f - 32)*5)/9 + 273.15
+                
+                if (!Number.isInteger(c)) {
+                    c = c.toFixed(4)
+                }
+                cel.value = c;
+            }
+
+            if(selectedTemp2.value==0&&selectedTemp1.value==2){
+                let c = f
+                cel.value = c;
+            }
+
+            if(selectedTemp2.value==1&&selectedTemp1.value==0){
+                let c = f
+                cel.value = c;
+            }
+
+            if(selectedTemp2.value==1&&selectedTemp1.value==1){
+                let c = +f + +273.15
+                
+                if (!Number.isInteger(c)) {
+                    c = c.toFixed(4)
+                }
+                cel.value = c;
+            }
+
+            if(selectedTemp2.value==1&&selectedTemp1.value==2){
+                let c=(f*9/5)+32
+                
+                if (!Number.isInteger(c)) {
+                    c = c.toFixed(4)
+                }
+                cel.value = c;
+            }
+
+            if(selectedTemp2.value==2&&selectedTemp1.value==0){
+                let c = +f - +273.15
+                
+                if (!Number.isInteger(c)) {
+                    c = c.toFixed(4)
+                }
+                cel.value = c;
+            }
+
+            if(selectedTemp2.value==2&&selectedTemp1.value==1){
+                let c=f
+                cel.value = c;
+            }
+
+            if(selectedTemp2.value==2&&selectedTemp1.value==2){
+                let c = 1.8*(f-273) + 32
+                
+                if (!Number.isInteger(c)) {
+                    c = c.toFixed(4)
+                }
+                cel.value = c;
+            }
+        })
+
+ // -----------------------------------------------------------------------------------------------------------------
+
+        var selectedTemp1 = document.getElementById('temp-type-1')
+        
+        document.addEventListener('mouseover', function(){
+            if(selectedTemp1.value== 1){
+            document.getElementById('myCel').innerHTML = 'Kelvin: ';
+        }
+        })
+
+        document.addEventListener('mouseover', function(){
+            if(selectedTemp1.value== 0){
+            document.getElementById('myCel').innerHTML = 'Celsius: ';
+        }
+        })
+
+        document.addEventListener('mouseover', function(){
+            if(selectedTemp1.value== 2){
+            document.getElementById('myCel').innerHTML = 'Fahrenheit: ';
+        }
+        })
+
+        var selectedTemp2 = document.getElementById('temp-type-2')
+
+        document.addEventListener('mouseover', function(){
+            if(selectedTemp2.value==0){
+                document.getElementById('myFah').innerHTML = 'Fahrenheit: '
+            }
+        })
+
+        document.addEventListener('mouseover', function(){
+            if(selectedTemp2.value==1){
+                document.getElementById('myFah').innerHTML = 'Celsius: '
+            }
+        })
+
+        document.addEventListener('mouseover', function(){
+            if(selectedTemp2.value==2){
+                document.getElementById('myFah').innerHTML = 'Kelvin: '
+            }
+        })
+    </script>
+</body>
+
+</html>
